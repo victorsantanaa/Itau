@@ -27,7 +27,7 @@ def erosao(f, b):
           yi = int(xi + bi - bl / 2 + 0.5) # ajustar vizinho (yi,yj) de (xi,xj), definido por b
           yj = int(xj + bj - bc / 2 + 0.5) # considerando origem o centro de b
           if (0 <= yi < l and 0 <= yj < c):
-            if (g[xi][xj] > (f[yi][yj] - b[bi][bj])): # calcula o máximo dos vizinhos [yi,yj] de [xi,y]
+            if (g[xi][xj] > (f[yi][yj] - b[bi][bj])): # calcula o minimo dos vizinhos [yi,yj] de [xi,y]
                 g[xi][xj]  =  f[yi][yj] - b[bi][bj]
   return g
 
