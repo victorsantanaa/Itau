@@ -1,0 +1,37 @@
+import numpy as np
+BL = 3
+BC = 4
+L = 6
+C = 7
+f = np.zeros((L,C), dtype = 'int')
+b = np.zeros((BL,BC), dtype = 'int')
+g = np.zeros((L,C), dtype = 'int')
+
+for i in range(BL):
+  for j in range (BC):
+    b[i,j] = input();
+
+for i in range(L):
+  for j in range (C):
+    f[i,j] = input();
+
+def erosao(f, b):
+  [l, c] = f.shape
+  [bl, bc] = b.shape
+  g = f.copy()
+
+  for xi in range(l): # para cada linha xi de f
+    for xj in range(c): # para cada coluna xj de f
+      for bi in range(bl): # para cada linha bi de b
+        for bj in range(bc): # para cada coluna bj de b
+          yi = int(xi + bi - bl / 2 + 0.5) # ajustar vizinho (yi,yj) de (xi,xj), definido por b
+          yj = int(xj + bj - bc / 2 + 0.5) # considerando origem o centro de b
+          if (0 <= yi < l and 0 <= yj < c):
+            if (g[xi][xj] > (f[yi][yj] - b[bi][bj])): # calcula o máximo dos vizinhos [yi,yj] de [xi,y]
+                g[xi][xj]  =  f[yi][yj] - b[bi][bj]
+  return g
+
+g = erosao(f,b)
+for i in range(L):
+    for j in range(C):
+        print(g[i][j])
